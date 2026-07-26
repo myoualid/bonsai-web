@@ -1,1 +1,0 @@
-import"./full-CjaWyGxS.js";import{c as o,B as r,a as t,s as a}from"./presets-CSl3TCO6.js";import"./__vite-browser-external-DauzbRu6.js";o(import.meta.url);const s=new r;s.start({config:t()}).catch(a);
