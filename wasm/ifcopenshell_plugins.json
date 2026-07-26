@@ -1,0 +1,24 @@
+{
+  "schema": {
+    "ifc2x3": {"wasm": "plugins/ifcopenshell.parse.schema.ifc2x3.wasm"},
+    "ifc4": {"wasm": "plugins/ifcopenshell.parse.schema.ifc4.wasm"},
+    "ifc4x3_add2": {"wasm": "plugins/ifcopenshell.parse.schema.ifc4x3_add2.wasm"}
+  },
+  "kernel": {
+    "opencascade": {"wasm": "plugins/ifcopenshell.geometry.kernel.opencascade.wasm"},
+    "passthrough": {"wasm": "plugins/ifcopenshell.geometry.kernel.passthrough.wasm"}
+  },
+  "mapping": {
+    "ifc2x3": {"wasm": "plugins/ifcopenshell.geometry.mapping.ifc2x3.wasm"},
+    "ifc4": {"wasm": "plugins/ifcopenshell.geometry.mapping.ifc4.wasm"},
+    "ifc4x3_add2": {"wasm": "plugins/ifcopenshell.geometry.mapping.ifc4x3_add2.wasm"}
+  },
+  "document": {
+    "xml.ifc2x3": {"wasm": "plugins/ifcopenshell.document.xml.ifc2x3.wasm"},
+    "xml.ifc4": {"wasm": "plugins/ifcopenshell.document.xml.ifc4.wasm"},
+    "xml.ifc4x3_add2": {"wasm": "plugins/ifcopenshell.document.xml.ifc4x3_add2.wasm"}
+  },
+  "geometry_serializer": {
+    "obj": {"wasm": "plugins/ifcopenshell.geometry.obj.wasm"}
+  }
+}
