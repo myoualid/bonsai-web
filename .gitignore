@@ -1,0 +1,8 @@
+# CMake / Ninja build artifacts (must not be published)
+ifcviewer-web/_deps/
+ifcviewer-web/CMakeFiles/
+ifcviewer-web/CMakeCache.txt
+ifcviewer-web/build.ninja
+ifcviewer-web/cmake_install.cmake
+ifcviewer-web/.ninja_*
+ifcviewer-web/ifcviewer/
