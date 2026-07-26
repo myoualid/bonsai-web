@@ -6340,24 +6340,24 @@ function checkIncomingModuleAPI() {
 }
 
 var ASM_CONSTS = {
-  140608: $0 => {
+  140656: $0 => {
     Module._app_ptr = $0;
   },
-  140634: $0 => {
+  140682: $0 => {
     var c = document.querySelector(UTF8ToString($0));
     if (c) c.addEventListener("contextmenu", function(ev) {
       ev.preventDefault();
     });
   },
-  140769: () => {
+  140817: () => {
     var c = document.getElementById("viewer-canvas");
     return c ? c.getBoundingClientRect().left : 0;
   },
-  140870: () => {
+  140918: () => {
     var c = document.getElementById("viewer-canvas");
     return c ? c.getBoundingClientRect().top : 0;
   },
-  140970: ($0, $1, $2, $3) => {
+  141018: ($0, $1, $2, $3) => {
     var m = document.getElementById("marquee");
     if (m) {
       m.style.display = "block";
@@ -6367,7 +6367,7 @@ var ASM_CONSTS = {
       m.style.height = $3 + "px";
     }
   },
-  141162: () => {
+  141210: () => {
     if (Module.__ifcvOnMeasureModeChanged) {
       var fn = Module.__ifcvOnMeasureModeChanged;
       setTimeout(function() {
@@ -6375,37 +6375,37 @@ var ASM_CONSTS = {
       }, 0);
     }
   },
-  141290: () => {
+  141338: () => {
     var m = document.getElementById("marquee");
     if (m) m.style.display = "none";
   },
-  141371: () => {
+  141419: () => {
     if (Module.__ifcvOnSelect) Module.__ifcvOnSelect(0, "", -1);
   },
-  141436: () => {
+  141484: () => {
     if (Module._viewerSurfacePickComplete) {
       Module._viewerSurfacePickComplete(0, 0, 0, 0, 0, 0, 1);
     }
   },
-  141539: () => {
+  141587: () => {
     if (Module.__ifcvOnSelect) Module.__ifcvOnSelect(0, "", -1);
   },
-  141604: ($0, $1) => {
+  141652: ($0, $1) => {
     if (Module._viewerPickComplete) {
       Module._viewerPickComplete($0, $1);
     }
   },
-  141680: () => {
+  141728: () => {
     if (Module._viewerSurfacePickComplete) {
       Module._viewerSurfacePickComplete(0, 0, 0, 0, 0, 0, 1);
     }
   },
-  141783: ($0, $1, $2, $3, $4, $5) => {
+  141831: ($0, $1, $2, $3, $4, $5) => {
     if (Module._viewerSurfacePickComplete) {
       Module._viewerSurfacePickComplete(1, $0, $1, $2, $3, $4, $5);
     }
   },
-  141893: () => {
+  141941: () => {
     if (Module.__ifcvOnMeasureModeChanged) {
       var fn = Module.__ifcvOnMeasureModeChanged;
       setTimeout(function() {
@@ -6413,7 +6413,15 @@ var ASM_CONSTS = {
       }, 0);
     }
   },
-  142021: ($0, $1, $2) => {
+  142069: () => {
+    if (Module.__ifcvOnSelect) Module.__ifcvOnSelect(0, "", -1);
+  },
+  142134: ($0, $1) => {
+    if (Module._viewerPickComplete) {
+      Module._viewerPickComplete($0, $1);
+    }
+  },
+  142210: ($0, $1, $2) => {
     if (Module.__ifcvOnSelect) Module.__ifcvOnSelect($0, UTF8ToString($1), $2);
   }
 };
@@ -6677,6 +6685,20 @@ var _viewer_measure_hud_text = Module["_viewer_measure_hud_text"] = makeInvalidE
 
 var _viewer_measure_on_selection_changed = Module["_viewer_measure_on_selection_changed"] = makeInvalidEarlyAccess("_viewer_measure_on_selection_changed");
 
+var _viewer_active_selection = Module["_viewer_active_selection"] = makeInvalidEarlyAccess("_viewer_active_selection");
+
+var _viewer_clear_selection = Module["_viewer_clear_selection"] = makeInvalidEarlyAccess("_viewer_clear_selection");
+
+var _viewer_select_object = Module["_viewer_select_object"] = makeInvalidEarlyAccess("_viewer_select_object");
+
+var _viewer_select_objects = Module["_viewer_select_objects"] = makeInvalidEarlyAccess("_viewer_select_objects");
+
+var _viewer_hide_objects = Module["_viewer_hide_objects"] = makeInvalidEarlyAccess("_viewer_hide_objects");
+
+var _viewer_show_objects = Module["_viewer_show_objects"] = makeInvalidEarlyAccess("_viewer_show_objects");
+
+var _viewer_isolate_objects = Module["_viewer_isolate_objects"] = makeInvalidEarlyAccess("_viewer_isolate_objects");
+
 var _viewer_create_procedural_equipment = Module["_viewer_create_procedural_equipment"] = makeInvalidEarlyAccess("_viewer_create_procedural_equipment");
 
 var _viewer_create_procedural_box = Module["_viewer_create_procedural_box"] = makeInvalidEarlyAccess("_viewer_create_procedural_box");
@@ -6851,6 +6873,13 @@ function assignWasmExports(wasmExports) {
   Module["_viewer_measure_remove_last_point"] = _viewer_measure_remove_last_point = createExportWrapper("viewer_measure_remove_last_point", 0);
   Module["_viewer_measure_hud_text"] = _viewer_measure_hud_text = createExportWrapper("viewer_measure_hud_text", 2);
   Module["_viewer_measure_on_selection_changed"] = _viewer_measure_on_selection_changed = createExportWrapper("viewer_measure_on_selection_changed", 0);
+  Module["_viewer_active_selection"] = _viewer_active_selection = createExportWrapper("viewer_active_selection", 0);
+  Module["_viewer_clear_selection"] = _viewer_clear_selection = createExportWrapper("viewer_clear_selection", 0);
+  Module["_viewer_select_object"] = _viewer_select_object = createExportWrapper("viewer_select_object", 2);
+  Module["_viewer_select_objects"] = _viewer_select_objects = createExportWrapper("viewer_select_objects", 3);
+  Module["_viewer_hide_objects"] = _viewer_hide_objects = createExportWrapper("viewer_hide_objects", 2);
+  Module["_viewer_show_objects"] = _viewer_show_objects = createExportWrapper("viewer_show_objects", 2);
+  Module["_viewer_isolate_objects"] = _viewer_isolate_objects = createExportWrapper("viewer_isolate_objects", 2);
   Module["_viewer_create_procedural_equipment"] = _viewer_create_procedural_equipment = createExportWrapper("viewer_create_procedural_equipment", 6);
   Module["_viewer_create_procedural_box"] = _viewer_create_procedural_box = createExportWrapper("viewer_create_procedural_box", 7);
   Module["_viewer_create_procedural_truck"] = _viewer_create_procedural_truck = createExportWrapper("viewer_create_procedural_truck", 4);
