@@ -61,6 +61,8 @@
     yz: { u: GRID_AXIS_COLORS.y, v: GRID_AXIS_COLORS.z },
   };
   var GRID_DEFAULT_COLOR = -1;
+  var GRID_MINOR_OPACITY = 0.18;
+  var GRID_MAJOR_OPACITY = 0.55;
   var gridRegistry = Object.create(null);
 
   function normalizeGridDefinition(definition) {
@@ -75,13 +77,14 @@
       divisions: Math.max(1, definition.divisions | 0 || 10),
       colorU: definition.colorU || defaults.u,
       colorV: definition.colorV || defaults.v,
+      opacity: definition.opacity != null ? definition.opacity : GRID_MAJOR_OPACITY,
       visible: definition.visible !== false,
     };
   }
 
   var GRID_UPSERT_ARG_TYPES = [
     'string', 'number', 'number', 'number', 'number', 'number', 'number',
-    'number', 'number', 'number', 'number', 'number', 'number', 'number',
+    'number', 'number', 'number', 'number', 'number', 'number', 'number', 'number',
   ];
 
   function upsertGridWasm(Module, grid) {
@@ -96,6 +99,7 @@
       grid.divisions,
       u[0], u[1], u[2],
       v[0], v[1], v[2],
+      grid.opacity != null ? grid.opacity : GRID_MAJOR_OPACITY,
       grid.visible ? 1 : 0,
     ];
     // Direct wasm exports do not UTF-8 marshal JS strings — ccall is required for ids.
@@ -341,6 +345,46 @@
           Module._set_background_color_c(r, g, b, a == null ? 1 : a);
         }
       },
+      // Three.js-style scene fog. mode: 'off' | 'on' | 'linear' | 'exp2'.
+      setFog: function (options) {
+        var opts = options || {};
+        var modeName = (opts.mode == null ? 'off' : String(opts.mode)).toLowerCase();
+        var mode = modeName === 'linear' || modeName === 'on' ? 1
+          : modeName === 'exp2' ? 2
+          : 0;
+        var color = opts.color;
+        var r = 0.125, g = 0.137, b = 0.161;
+        if (typeof color === 'string' && color.charAt(0) === '#') {
+          var hex = color.slice(1);
+          if (hex.length === 6 || hex.length === 8) {
+            r = parseInt(hex.slice(0, 2), 16) / 255;
+            g = parseInt(hex.slice(2, 4), 16) / 255;
+            b = parseInt(hex.slice(4, 6), 16) / 255;
+          }
+        } else if (Array.isArray(color) && color.length >= 3) {
+          r = color[0]; g = color[1]; b = color[2];
+        } else if (color && typeof color === 'object') {
+          r = color.r; g = color.g; b = color.b;
+        }
+        if (Module._set_fog_c) {
+          Module._set_fog_c(
+            mode,
+            opts.near == null ? 1 : opts.near,
+            opts.far == null ? 1000 : opts.far,
+            opts.density == null ? 0.002 : opts.density,
+            r, g, b
+          );
+        }
+      },
+      fog: function () {
+        var mode = Module._fog_mode_c ? Module._fog_mode_c() : 0;
+        return {
+          mode: mode === 1 ? 'linear' : mode === 2 ? 'exp2' : 'off',
+          near: Module._fog_near_c ? Module._fog_near_c() : 1,
+          far: Module._fog_far_c ? Module._fog_far_c() : 1000,
+          density: Module._fog_density_c ? Module._fog_density_c() : 0.002,
+        };
+      },
       setOrientationGizmoCorner: function (corner) {
         setOrientationGizmoCornerModule(Module, corner);
       },
@@ -388,12 +432,18 @@
       standardView: function (view) {
         if (Module._standard_view_c) Module._standard_view_c(parseStandardView(view));
       },
+      setNavPreset: function (name) {
+        if (typeof Module.ccall === 'function') {
+          Module.ccall('set_nav_preset_c', null, ['string'], [String(name || 'bonsai')]);
+        }
+      },
       createOrientationGizmo: function (options) {
-        var factory = global.IfcViewer && global.IfcViewer.OrientationGizmo
-          ? global.IfcViewer.OrientationGizmo.create
-          : null;
+        var factory = opts.orientationGizmoFactory
+          || (global.IfcViewer && global.IfcViewer.OrientationGizmo
+            ? global.IfcViewer.OrientationGizmo.create
+            : null);
         if (!factory) {
-          throw new Error('Load orientation-gizmo.js before createOrientationGizmo()');
+          throw new Error('Pass orientationGizmoFactory or load orientation-gizmo.js before createOrientationGizmo()');
         }
         var gizmo = factory(api, options || {});
         domGizmos.push(gizmo);

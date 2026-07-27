@@ -6340,24 +6340,24 @@ function checkIncomingModuleAPI() {
 }
 
 var ASM_CONSTS = {
-  140656: $0 => {
+  144088: $0 => {
     Module._app_ptr = $0;
   },
-  140682: $0 => {
+  144114: $0 => {
     var c = document.querySelector(UTF8ToString($0));
     if (c) c.addEventListener("contextmenu", function(ev) {
       ev.preventDefault();
     });
   },
-  140817: () => {
+  144249: () => {
     var c = document.getElementById("viewer-canvas");
     return c ? c.getBoundingClientRect().left : 0;
   },
-  140918: () => {
+  144350: () => {
     var c = document.getElementById("viewer-canvas");
     return c ? c.getBoundingClientRect().top : 0;
   },
-  141018: ($0, $1, $2, $3) => {
+  144450: ($0, $1, $2, $3) => {
     var m = document.getElementById("marquee");
     if (m) {
       m.style.display = "block";
@@ -6367,7 +6367,7 @@ var ASM_CONSTS = {
       m.style.height = $3 + "px";
     }
   },
-  141210: () => {
+  144642: () => {
     if (Module.__ifcvOnMeasureModeChanged) {
       var fn = Module.__ifcvOnMeasureModeChanged;
       setTimeout(function() {
@@ -6375,37 +6375,38 @@ var ASM_CONSTS = {
       }, 0);
     }
   },
-  141338: () => {
+  144770: () => {
     var m = document.getElementById("marquee");
     if (m) m.style.display = "none";
   },
-  141419: () => {
+  144851: () => {
     if (Module.__ifcvOnSelect) Module.__ifcvOnSelect(0, "", -1);
   },
-  141484: () => {
+  144916: () => (typeof Module !== "undefined" && Module.__ifcvViewportShortcutsEnabled === true) ? 1 : 0,
+  145018: () => {
     if (Module._viewerSurfacePickComplete) {
       Module._viewerSurfacePickComplete(0, 0, 0, 0, 0, 0, 1);
     }
   },
-  141587: () => {
+  145121: () => {
     if (Module.__ifcvOnSelect) Module.__ifcvOnSelect(0, "", -1);
   },
-  141652: ($0, $1) => {
+  145186: ($0, $1) => {
     if (Module._viewerPickComplete) {
       Module._viewerPickComplete($0, $1);
     }
   },
-  141728: () => {
+  145262: () => {
     if (Module._viewerSurfacePickComplete) {
       Module._viewerSurfacePickComplete(0, 0, 0, 0, 0, 0, 1);
     }
   },
-  141831: ($0, $1, $2, $3, $4, $5) => {
+  145365: ($0, $1, $2, $3, $4, $5) => {
     if (Module._viewerSurfacePickComplete) {
       Module._viewerSurfacePickComplete(1, $0, $1, $2, $3, $4, $5);
     }
   },
-  141941: () => {
+  145475: () => {
     if (Module.__ifcvOnMeasureModeChanged) {
       var fn = Module.__ifcvOnMeasureModeChanged;
       setTimeout(function() {
@@ -6413,15 +6414,15 @@ var ASM_CONSTS = {
       }, 0);
     }
   },
-  142069: () => {
+  145603: () => {
     if (Module.__ifcvOnSelect) Module.__ifcvOnSelect(0, "", -1);
   },
-  142134: ($0, $1) => {
+  145668: ($0, $1) => {
     if (Module._viewerPickComplete) {
       Module._viewerPickComplete($0, $1);
     }
   },
-  142210: ($0, $1, $2) => {
+  145744: ($0, $1, $2) => {
     if (Module.__ifcvOnSelect) Module.__ifcvOnSelect($0, UTF8ToString($1), $2);
   }
 };
@@ -6595,6 +6596,16 @@ var _toggle_world_axes_c = Module["_toggle_world_axes_c"] = makeInvalidEarlyAcce
 
 var _set_background_color_c = Module["_set_background_color_c"] = makeInvalidEarlyAccess("_set_background_color_c");
 
+var _set_fog_c = Module["_set_fog_c"] = makeInvalidEarlyAccess("_set_fog_c");
+
+var _fog_mode_c = Module["_fog_mode_c"] = makeInvalidEarlyAccess("_fog_mode_c");
+
+var _fog_near_c = Module["_fog_near_c"] = makeInvalidEarlyAccess("_fog_near_c");
+
+var _fog_far_c = Module["_fog_far_c"] = makeInvalidEarlyAccess("_fog_far_c");
+
+var _fog_density_c = Module["_fog_density_c"] = makeInvalidEarlyAccess("_fog_density_c");
+
 var _set_orientation_gizmo_corner_c = Module["_set_orientation_gizmo_corner_c"] = makeInvalidEarlyAccess("_set_orientation_gizmo_corner_c");
 
 var _orientation_gizmo_corner_c = Module["_orientation_gizmo_corner_c"] = makeInvalidEarlyAccess("_orientation_gizmo_corner_c");
@@ -6650,6 +6661,8 @@ var _viewer_remove_model = Module["_viewer_remove_model"] = makeInvalidEarlyAcce
 var _viewer_model_object_id_base = Module["_viewer_model_object_id_base"] = makeInvalidEarlyAccess("_viewer_model_object_id_base");
 
 var _viewer_request_frame = Module["_viewer_request_frame"] = makeInvalidEarlyAccess("_viewer_request_frame");
+
+var _set_nav_preset_c = Module["_set_nav_preset_c"] = makeInvalidEarlyAccess("_set_nav_preset_c");
 
 var _main = Module["_main"] = makeInvalidEarlyAccess("_main");
 
@@ -6821,13 +6834,18 @@ function assignWasmExports(wasmExports) {
   Module["_set_grid_visible_c"] = _set_grid_visible_c = createExportWrapper("set_grid_visible_c", 1);
   Module["_grid_is_visible_c"] = _grid_is_visible_c = createExportWrapper("grid_is_visible_c", 0);
   Module["_toggle_grid_c"] = _toggle_grid_c = createExportWrapper("toggle_grid_c", 0);
-  Module["_grid_upsert_c"] = _grid_upsert_c = createExportWrapper("grid_upsert_c", 14);
+  Module["_grid_upsert_c"] = _grid_upsert_c = createExportWrapper("grid_upsert_c", 15);
   Module["_grid_remove_c"] = _grid_remove_c = createExportWrapper("grid_remove_c", 1);
   Module["_grid_clear_c"] = _grid_clear_c = createExportWrapper("grid_clear_c", 0);
   Module["_set_world_axes_visible_c"] = _set_world_axes_visible_c = createExportWrapper("set_world_axes_visible_c", 1);
   Module["_world_axes_is_visible_c"] = _world_axes_is_visible_c = createExportWrapper("world_axes_is_visible_c", 0);
   Module["_toggle_world_axes_c"] = _toggle_world_axes_c = createExportWrapper("toggle_world_axes_c", 0);
   Module["_set_background_color_c"] = _set_background_color_c = createExportWrapper("set_background_color_c", 4);
+  Module["_set_fog_c"] = _set_fog_c = createExportWrapper("set_fog_c", 7);
+  Module["_fog_mode_c"] = _fog_mode_c = createExportWrapper("fog_mode_c", 0);
+  Module["_fog_near_c"] = _fog_near_c = createExportWrapper("fog_near_c", 0);
+  Module["_fog_far_c"] = _fog_far_c = createExportWrapper("fog_far_c", 0);
+  Module["_fog_density_c"] = _fog_density_c = createExportWrapper("fog_density_c", 0);
   Module["_set_orientation_gizmo_corner_c"] = _set_orientation_gizmo_corner_c = createExportWrapper("set_orientation_gizmo_corner_c", 1);
   Module["_orientation_gizmo_corner_c"] = _orientation_gizmo_corner_c = createExportWrapper("orientation_gizmo_corner_c", 0);
   Module["_set_orientation_gizmo_visible_c"] = _set_orientation_gizmo_visible_c = createExportWrapper("set_orientation_gizmo_visible_c", 1);
@@ -6856,6 +6874,7 @@ function assignWasmExports(wasmExports) {
   Module["_viewer_remove_model"] = _viewer_remove_model = createExportWrapper("viewer_remove_model", 1);
   Module["_viewer_model_object_id_base"] = _viewer_model_object_id_base = createExportWrapper("viewer_model_object_id_base", 1);
   Module["_viewer_request_frame"] = _viewer_request_frame = createExportWrapper("viewer_request_frame", 0);
+  Module["_set_nav_preset_c"] = _set_nav_preset_c = createExportWrapper("set_nav_preset_c", 1);
   Module["_main"] = _main = createExportWrapper("__main_argc_argv", 2);
   Module["_viewer_pick_supported"] = _viewer_pick_supported = createExportWrapper("viewer_pick_supported", 0);
   Module["_viewer_pick_at"] = _viewer_pick_at = createExportWrapper("viewer_pick_at", 2);
