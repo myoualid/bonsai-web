@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Bonsai Web Headless</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style>
+			html, body { margin: 0; height: 100%; background: #1a1a1a; }
+			body { position: relative; }
+		</style>
+	</head>
+	<body>
+		<script type="module" src="">
+			
+			import { BonsaiWebConfiguration } from './configuration/config.js';
+			import { installImports } from './configuration/imports.js';
+
+			installImports( BonsaiWebConfiguration.paths );
+
+			const BonsaiWeb = await import( './bonsai-headless.js' );
+			window.bonsai = await BonsaiWeb.start( document.body, BonsaiWebConfiguration );
+
+
+		</script>
+	</body>
+</html>
