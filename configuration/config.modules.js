@@ -7,5 +7,5 @@ export const CoreModules = [
 	{ id: 'properties', active: true },
 	{ id: 'viewer', active: true },
 	{ id: 'profiling', active: true },
-	{ id: 'code.terminal', active: true },
+	{ id: 'code.terminal', active: false },
 ];
